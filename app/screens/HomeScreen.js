@@ -9,29 +9,34 @@ import {
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import NotificationIcon from '../../assets/notification-icon.png';
+import Profile from '../../assets/profile.png'
+import AppointmentImage from '../../assets/appointment.png';
+
+
 
 export default function HomeScreen() {
   const navigation = useNavigation();
-  const [steps, setSteps] = useState(12000); // Initial step count
+  const [steps, setSteps] = useState(12000); 
 
   return (
     <ScrollView style={styles.container}>
       {/* Header */}
-      <View style={styles.header}>
-        <View style={styles.profileSection}>
-          <Image
-            source={{ uri: 'https://via.placeholder.com/50' }} // User Profile Image
-            style={styles.profileImage}
-          />
-          <Text style={styles.username}>Ethan Harkinson</Text>
-        </View>
-        <TouchableOpacity>
-          <Image
-            source={NotificationIcon}  // Notification Icon
-            style={styles.notificationIcon}
-          />
-        </TouchableOpacity>
-      </View>
+      <View style={styles.healthScoreContainer}>
+  <View style={styles.profileSection}>
+    <Image
+      source={Profile} 
+      style={styles.profileImage}
+    />
+    <Text style={styles.username}>Ethan Harkinson</Text>
+  </View>
+  <TouchableOpacity>
+    <Image
+      source={NotificationIcon} 
+      style={styles.notificationIcon}
+    />
+  </TouchableOpacity>
+</View>
+
 
       {/* Health Score */}
       <View style={styles.healthScoreContainer}>
@@ -47,16 +52,29 @@ export default function HomeScreen() {
 
       {/* Upcoming Appointment */}
       <TouchableOpacity 
-        style={styles.card} 
-        onPress={() => navigation.navigate('AppointmentScreen')} // Navigate to AppointmentScreen
-      >
-        <Text style={styles.cardTitle}>UPCOMING</Text>
-        <Text style={styles.doctorName}>Laurie Simons MD, DipABLM</Text>
-        <Text style={styles.doctorSpecialty}>Internal Medicine</Text>
-        <Text style={styles.appointmentDetails}>
-          Thu, December 21, 2024 | 10:00 AM PST
-        </Text>
-      </TouchableOpacity>
+  style={styles.card} 
+  onPress={() => navigation.navigate('AppointmentScreen')} 
+>
+  <View style={styles.cardHeader}>
+    <View>
+      <Text style={styles.cardTitle}>UPCOMING</Text>
+      <Text style={styles.doctorName}>Laurie Simons MD, DipABLM</Text>
+      <Text style={styles.doctorSpecialty}>Internal Medicine</Text>
+      <Text style={styles.appointmentDetails}>
+        Thu, December 21, 2024 | 10:00 AM PST
+      </Text>
+    </View>
+    <View style={styles.cardRightSection}>
+    <Text style={styles.arrow}>{'>'}</Text>
+      <Image
+        source={AppointmentImage}
+        style={styles.doctorImage}
+      />
+      
+    </View>
+  </View>
+</TouchableOpacity>
+
 
 {/* Health Overview */}
 <Text style={styles.sectionTitle}>Health Overview</Text>
@@ -83,10 +101,10 @@ export default function HomeScreen() {
   
   <TouchableOpacity 
     style={[styles.healthBox, { backgroundColor: '#FFE0B2' }]} 
-    onPress={() => console.log('BP box clicked')}
+    onPress={() => console.log('Sleep box clicked')}
   >
-    <Text style={styles.healthBoxTitle}>BP</Text>
-    <Text style={styles.healthBoxValue}>Normal</Text>
+    <Text style={styles.healthBoxTitle}>Sleep</Text>
+    <Text style={styles.healthBoxValue}>8 hours</Text>
   </TouchableOpacity>
 </ScrollView>
 
@@ -138,21 +156,30 @@ const styles = StyleSheet.create({
   profileSection: {
     flexDirection: 'row',
     alignItems: 'center',
+    backgroundColor: '#4a90e2', 
+    padding: 16,
+    borderRadius: 10, 
+    margin: 16,
   },
   profileImage: {
-    width: 50,
-    height: 50,
-    borderRadius: 25,
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    borderWidth: 2,
+    borderColor: '#ffffff', 
   },
   username: {
     marginLeft: 10,
-    fontSize: 16,
+    fontSize: 18, 
     fontWeight: 'bold',
+    color: '#fff', 
   },
   notificationIcon: {
     width: 30,
     height: 30,
+    marginLeft: 'auto',
   },
+  
   healthScoreContainer: {
     padding: 16,
     backgroundColor: '#4a90e2',
@@ -192,6 +219,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffffff',
     borderRadius: 10,
     elevation: 3,
+    flexDirection: 'column',
+  },
+  cardHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
   cardTitle: {
     color: '#4caf50',
@@ -211,6 +244,21 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: '#999',
   },
+  cardRightSection: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  doctorImage: {
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+    marginBottom: 4,
+  },
+  arrow: {
+    fontSize: 24,
+    color: '#999',
+  },
+  
   sectionTitle: {
     fontSize: 18,
     fontWeight: 'bold',
@@ -219,7 +267,6 @@ const styles = StyleSheet.create({
   },
   healthOverview: {
     flexDirection: 'row',
-    // justifyContent: 'space-between',
     paddingHorizontal: 8,
     marginVertical: 8,
   },
@@ -284,3 +331,8 @@ const styles = StyleSheet.create({
     marginTop: 4,
   },
 });
+
+
+
+
+

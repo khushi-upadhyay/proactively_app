@@ -23,12 +23,15 @@ export default function HomeStackNavigator() {
       <HomeStack.Screen
         name = "BMIScreen"
         component={BMIScreen}
-        options={{headerShown: true, title: 'BMI Details' }}/>
+        options={{headerShown: true, title: 'BMI Entry' }}/>
          <HomeStack.Screen 
         name="StepsScreen" 
         component={StepsScreen} 
-        options={{ headerShown: true, title: 'Step Tracker' }} 
-      />
+        options={{ headerShown: true, title: 'Steps Entry' }} />
+        {/* <HomeStack.Screen
+        name = "SleepScreen"
+        component={SleepScreen}
+        options={{headerShown:true, title: 'Sleep Entry'}}/> */}
     </HomeStack.Navigator>
   );
 }

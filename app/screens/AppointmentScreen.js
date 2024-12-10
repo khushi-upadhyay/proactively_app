@@ -1,9 +1,21 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, Image, StyleSheet, TouchableOpacity, Linking, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import AppointmentImage from '../../assets/appointment.png';
 
 const AppointmentScreen = () => {
   const navigation = useNavigation();
+
+  const openMeetingLink = async () => {
+    const url = 'https://meet.google.com/landing'; 
+    const supported = await Linking.canOpenURL(url);
+
+    if (supported) {
+      await Linking.openURL(url);
+    } else {
+      Alert.alert('Error', "Can't open the meeting link.");
+    }
+  };
 
   return (
     <View style={styles.container}>
@@ -23,7 +35,7 @@ const AppointmentScreen = () => {
       {/* Appointment Info */}
       <View style={styles.infoContainer}>
         <Image
-          source={{ uri: 'https://via.placeholder.com/100' }} // Replace with the actual image URL
+          source={AppointmentImage} // Replace with the actual image URL
           style={styles.profileImage}
         />
         <Text style={styles.infoTitle}>Your upcoming appointment with</Text>
@@ -43,7 +55,7 @@ const AppointmentScreen = () => {
       </View>
 
       {/* Join Button */}
-      <TouchableOpacity style={styles.joinButton}>
+      <TouchableOpacity style={styles.joinButton} onPress={openMeetingLink}>
         <Text style={styles.joinButtonText}>Join meeting {'\u2197'}</Text>
       </TouchableOpacity>
     </View>
