@@ -7,17 +7,17 @@ import {
   TextInput,
   Alert,
 } from 'react-native';
-import { MaterialCommunityIcons } from '@expo/vector-icons'; // For moon icon with Z
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 export default function SleepEntryScreen() {
-  const [hours, setHours] = useState(8); // Initial sleep hours
+  const [hours, setHours] = useState(8); 
 
   const incrementHours = () => {
-    setHours((prev) => Math.min(prev + 1, 24)); // Max hours capped at 24
+    setHours((prev) => Math.min(prev + 1, 24)); 
   };
 
   const decrementHours = () => {
-    setHours((prev) => Math.max(prev - 1, 0)); // Min hours capped at 0
+    setHours((prev) => Math.max(prev - 1, 0)); 
   };
 
   const handleSubmit = () => {
@@ -49,12 +49,7 @@ export default function SleepEntryScreen() {
         </TouchableOpacity>
 
         <View style={styles.sleepInfo}>
-          <MaterialCommunityIcons
-            name="moon-sleep"
-            size={24}
-            color="#000"
-            style={{ marginRight: 8 }}
-          />
+        <MaterialCommunityIcons name="moon-waning-crescent" size={24} color="black" />
           <Text style={styles.hoursText}>{hours} hours</Text>
         </View>
 

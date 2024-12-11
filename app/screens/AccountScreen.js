@@ -9,36 +9,36 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'; 
-
+import Profile from '../../assets/profile.png'
 
 export default function AccountScreen({ navigation }) {
-  const [userData, setUserData] = useState(null); // Holds the user's session data
-  const [loading, setLoading] = useState(true); // Loading state for async operations
+  const [userData, setUserData] = useState(null); 
+  const [loading, setLoading] = useState(true); 
 
   useEffect(() => {
     const fetchUserData = async () => {
       try {
         const session = await AsyncStorage.getItem('userSession');
         if (session) {
-          setUserData(JSON.parse(session)); // Parse and set the user data
+          const parsedData = JSON.parse(session);
+          setUserData(parsedData);
         } else {
-          navigation.navigate('Login'); // Redirect to login if no session found
+          navigation.navigate('Login');
         }
       } catch (error) {
         Alert.alert('Error', 'Failed to load user data.');
       } finally {
-        setLoading(false); // Stop the loader
+        setLoading(false);
       }
     };
-
+  
     fetchUserData();
   }, [navigation]);
 
   const handleLogout = async () => {
     try {
-      await AsyncStorage.removeItem('userSession'); // Clear the stored session
-      navigation.navigate('Login'); // Redirect to the login screen
+      await AsyncStorage.removeItem('userSession'); 
+      navigation.navigate('Login'); 
     } catch (error) {
       Alert.alert('Error', 'Failed to log out.');
     }
@@ -52,40 +52,36 @@ export default function AccountScreen({ navigation }) {
     );
   }
 
+  
+  const userName = userData?.email ?? 'No email found';
+
   return (
     <View style={styles.container}>
-      {/* User Info Section */}
+     
       <View style={styles.userInfo}>
         <Image
-          source={{
-            uri: 'https://via.placeholder.com/100', // Replace with actual user image URL
-          }}
+          source={Profile}
           style={styles.profileImage}
         />
         <View style={styles.textContainer}>
-          <Text style={styles.nameText}>
-            {userData?.name || 'Ethan Harkinson'} {/* Replace with name */}
-          </Text>
-          <Text style={styles.emailText}>
-            {userData?.email || 'ethanharkinson@outlook.com'} {/* Replace with email */}
-          </Text>
+          <Text style={styles.nameText}>{userName}</Text>
         </View>
       </View>
 
-      {/* Account Section */}
+     
       <TouchableOpacity style={styles.accountSection}>
         <View style={styles.accountIcon}>
-          <Text style={styles.accountIconText}>⚙️</Text> {/* Replace with actual icon if needed */}
+          <Text style={styles.accountIconText}>⚙️</Text>
         </View>
         <Text style={styles.accountText}>Account</Text>
       </TouchableOpacity>
 
-      {/* Logout Section */}
+   
       <TouchableOpacity onPress={handleLogout} style={styles.logoutContainer}>
         <Text style={styles.logoutText}>Log out</Text>
       </TouchableOpacity>
 
-      {/* Version Info */}
+      
       <View style={styles.versionContainer}>
         <Text style={styles.versionText}>Proactively version 0.0.1</Text>
       </View>
@@ -99,8 +95,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   userInfo: {
-    flexDirection: 'row', // Aligns items in a row
-    alignItems: 'center', // Vertically center content
+    flexDirection: 'row',
+    alignItems: 'center',
     marginVertical: 30,
     paddingHorizontal: 20,
   },
@@ -109,19 +105,15 @@ const styles = StyleSheet.create({
     height: 80,
     borderRadius: 40,
     backgroundColor: '#E5E7EB',
-    marginRight: 15, // Space between image and text
+    marginRight: 15,
   },
   textContainer: {
-    flex: 1, // Allow text to take remaining space
+    flex: 1,
   },
   nameText: {
     fontSize: 20,
     fontWeight: 'bold',
     color: '#000',
-  },
-  emailText: {
-    fontSize: 14,
-    color: '#707070',
   },
   accountSection: {
     flexDirection: 'row',

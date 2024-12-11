@@ -1,28 +1,30 @@
-// import { StatusBar } from 'expo-status-bar';
-// import { StyleSheet, Text, View } from 'react-native';
 
-// export default function App() {
-//   return (
-//     <View style={styles.container}>
-//       <Text>hello1  !</Text>
-//       <StatusBar style="auto" />
-//     </View>
-//   );
-// }
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     backgroundColor: '#fff',
-//     alignItems: 'center',
-//     justifyContent: 'center',
-//   },
-// });
-
-// /Users/admin70/Desktop/provital_app/App.js
 import React from 'react';
-import AppNavigator from './app/navigation/AppNavigator'; // Import the AppNavigator
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import LoginScreen from './app/LoginScreen';
+import AppNavigator from './app/navigation/AppNavigator';
+
+const Stack = createStackNavigator();
 
 export default function App() {
-  return <AppNavigator />; // Use AppNavigator to handle navigation
+  return (
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Login">
+    
+        <Stack.Screen
+  name="Login"
+  component={LoginScreen}
+  options={{ headerShown: false }}
+/>
+
+        <Stack.Screen
+  name="AppNavigator"
+  component={AppNavigator}
+  options={{ headerShown: false }}
+/>
+
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
 }

@@ -2,8 +2,9 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import HomeScreen from '../screens/HomeScreen';
 import AppointmentScreen from '../screens/AppointmentScreen';
-import BMIScreen from '../screens/Cards/BMIScreen'
-import StepsScreen from '../screens/Cards/StepsScreen'
+import BMIScreen from '../screens/Cards/BMIScreen';
+import StepsScreen from '../screens/Cards/StepsScreen';
+import SleepScreen from '../screens/Cards/SleepScreen'
 
 const HomeStack = createStackNavigator();
 
@@ -28,10 +29,11 @@ export default function HomeStackNavigator() {
         name="StepsScreen" 
         component={StepsScreen} 
         options={{ headerShown: true, title: 'Steps Entry' }} />
-        {/* <HomeStack.Screen
-        name = "SleepScreen"
-        component={SleepScreen}
-        options={{headerShown:true, title: 'Sleep Entry'}}/> */}
+       <HomeStack.Screen 
+        name="SleepScreen" 
+        component={SleepScreen} 
+        options={{ headerShown: true, title: 'Sleep Entry' }} 
+      />
     </HomeStack.Navigator>
   );
 }

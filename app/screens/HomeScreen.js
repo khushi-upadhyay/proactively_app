@@ -15,12 +15,12 @@ import AppointmentImage from '../../assets/appointment.png';
 
 
 export default function HomeScreen() {
-  const navigation = useNavigation();
+  const navigation = useNavigation();         
   const [steps, setSteps] = useState(12000); 
 
   return (
     <ScrollView style={styles.container}>
-      {/* Header */}
+    
       <View style={styles.healthScoreContainer}>
   <View style={styles.profileSection}>
     <Image
@@ -50,7 +50,7 @@ export default function HomeScreen() {
         </View>
       </View>
 
-      {/* Upcoming Appointment */}
+     
       <TouchableOpacity 
   style={styles.card} 
   onPress={() => navigation.navigate('AppointmentScreen')} 
@@ -76,7 +76,7 @@ export default function HomeScreen() {
 </TouchableOpacity>
 
 
-{/* Health Overview */}
+
 <Text style={styles.sectionTitle}>Health Overview</Text>
 <ScrollView 
   horizontal 
@@ -101,7 +101,7 @@ export default function HomeScreen() {
   
   <TouchableOpacity 
     style={[styles.healthBox, { backgroundColor: '#FFE0B2' }]} 
-    onPress={() => console.log('Sleep box clicked')}
+    onPress={() => navigation.navigate('SleepScreen')}
   >
     <Text style={styles.healthBoxTitle}>Sleep</Text>
     <Text style={styles.healthBoxValue}>8 hours</Text>
@@ -110,7 +110,7 @@ export default function HomeScreen() {
 
 
 
-      {/* To-Do List */}
+     
       <Text style={styles.sectionTitle}>Let’s check off your to-dos</Text>
       <Text style={styles.todoProgress}>1/4 Completed</Text>
       <View style={styles.progressBar}>

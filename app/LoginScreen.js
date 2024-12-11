@@ -16,16 +16,23 @@ export default function LoginScreen({ navigation }) {
   const [password, setPassword] = useState('');
 
   const handleLogin = async () => {
-    if (email === 'test@example.com' && password === 'password123') {
-      try {
-        // Store user data in AsyncStorage
-        await AsyncStorage.setItem('userSession', JSON.stringify({ email }));
-        navigation.navigate('Account'); // Navigate to the Account screen
-      } catch (error) {
-        Alert.alert('Error', 'Unable to store session.');
-      }
-    } else {
-      Alert.alert('Invalid Credentials', 'Please check your email and password.');
+    if (!email || !password) {
+      Alert.alert('Error', 'Please fill in both fields.');
+      return;
+    }
+    
+    try {
+     
+      const userData = { email, password };
+      await AsyncStorage.setItem('userSession', JSON.stringify(userData));
+      
+      navigation.reset({
+        index: 0,
+        routes: [{ name: 'AppNavigator' }],
+      });
+    } catch (error) {
+      console.error('Login error:', error);
+      Alert.alert('Error', 'Unable to start the session.');
     }
   };
 
@@ -38,7 +45,7 @@ export default function LoginScreen({ navigation }) {
       <Text style={styles.brand}>proactively {'>'}</Text>
       <Text style={styles.subHeader}>Login as a patient using your registered email.</Text>
 
-      {/* Email Input */}
+     
       <TextInput
         style={styles.input}
         placeholder="Email"
@@ -48,7 +55,7 @@ export default function LoginScreen({ navigation }) {
         autoCapitalize="none"
       />
 
-      {/* Password Input */}
+    
       <TextInput
         style={styles.input}
         placeholder="Password"
@@ -57,7 +64,7 @@ export default function LoginScreen({ navigation }) {
         secureTextEntry
       />
 
-      {/* Login Button */}
+      
       <TouchableOpacity style={styles.button} onPress={handleLogin}>
         <Text style={styles.buttonText}>Login</Text>
       </TouchableOpacity>

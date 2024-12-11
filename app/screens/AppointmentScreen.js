@@ -19,7 +19,7 @@ const AppointmentScreen = () => {
 
   return (
     <View style={styles.container}>
-      {/* Header */}
+     
       <View style={styles.headerContainer}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Text style={styles.backArrow}>{'\u2190'}</Text>
@@ -27,15 +27,15 @@ const AppointmentScreen = () => {
         <Text style={styles.headerTitle}>Appointment details</Text>
       </View>
 
-      {/* Status Badge */}
+     
       <View style={styles.statusBadgeContainer}>
         <Text style={styles.statusBadge}>UPCOMING</Text>
       </View>
 
-      {/* Appointment Info */}
+     
       <View style={styles.infoContainer}>
         <Image
-          source={AppointmentImage} // Replace with the actual image URL
+          source={AppointmentImage} 
           style={styles.profileImage}
         />
         <Text style={styles.infoTitle}>Your upcoming appointment with</Text>
